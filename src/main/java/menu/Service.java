@@ -27,7 +27,7 @@ public class Service {
         return Collections.frequency(recommendedCategories, selectedCategory) >= CATEGORY_DUPLICATE_LIMIT;
     }
 
-    public void recommendDayMenu(Coach coach, String recommendedDayCategory) {
+    public void recommendMenuToCoach(Coach coach, String recommendedDayCategory) {
         String selectedRandomMenu = selectRandomMenu(recommendedDayCategory);
         while (isDuplicateMenu(selectedRandomMenu, coach) || isHateMenu(selectedRandomMenu, coach)){
             selectedRandomMenu = selectRandomMenu(recommendedDayCategory);

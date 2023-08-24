@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Executable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +56,7 @@ class ServiceTest {
         Coach coach = new Coach("코치");
 
         //when
-        service.recommendDayMenu(coach, recommendedCategory);
+        service.recommendMenuToCoach(coach, recommendedCategory);
 
         //then
         assertThat(coach.getRecommendedMenus().get(0)).isIn(MenuBook.CATEGORY_MENUS.get("한식"));
