@@ -19,8 +19,9 @@ public class Controller {
         view.printStartComment();
         List<String> coachNames = readCoachNames();
         List<Coach> coaches = readHateMenus(coachNames);
-        service.recommendWeekMenu(coaches);
-        System.out.println("coaches = " + coaches);
+        List<String> categories = service.recommendWeekMenu(coaches);
+        view.printResult(coaches, categories);
+        view.printEndMessage();
     }
 
     private List<Coach> readHateMenus(List<String> coachNames) {
