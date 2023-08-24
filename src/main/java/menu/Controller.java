@@ -8,15 +8,18 @@ import java.util.Scanner;
 public class Controller {
     private final View view;
     private final Scanner scanner = new Scanner(System.in);
+    private final Service service;
 
-    Controller(View view) {
+    Controller(View view, Service service) {
         this.view = view;
+        this.service = service;
     }
 
     public void start() {
         view.printStartComment();
         List<String> coachNames = readCoachNames();
         List<Coach> coaches = readHateMenus(coachNames);
+        service.recommendWeekMenu(coaches);
         System.out.println("coaches = " + coaches);
     }
 
@@ -48,7 +51,7 @@ public class Controller {
     }
 
     private List<String> parseInputLine() {
-        return List.of(scanner.nextLine().split(", "));
+        return List.of(scanner.nextLine().split(","));
     }
 
     private List<String> readCoachNames() {
