@@ -49,4 +49,17 @@ class ServiceTest {
                 () -> service.validDuplicate("중식", recommendedCategories));
     }
      */
+
+    @Test
+    void recommendDayMenu() {
+        //given
+        String recommendedCategory = "한식";
+        Coach coach = new Coach("코치");
+
+        //when
+        service.recommendDayMenu(coach, recommendedCategory);
+
+        //then
+        assertThat(coach.getRecommendedMenus().get(0)).isIn(MenuBook.CATEGORY_MENUS.get("한식"));
+    }
 }
