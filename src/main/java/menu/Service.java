@@ -23,7 +23,7 @@ public class Service {
     }
 
     public String selectRandomCategory() {
-        return CATEGORIES.get(Randoms.pickNumberInRange(0, CATEGORIES.size() - 1));
+        return CATEGORIES.get(Randoms.pickNumberInRange(1, CATEGORIES.size()) - 1);
     }
 
     private boolean hasMoreThanLimit(String selectedCategory, List<String> recommendedCategories) {
@@ -50,13 +50,14 @@ public class Service {
         return Randoms.shuffle(CATEGORY_MENUS.get(category)).get(0);
     }
 
-    public void recommendWeekMenu(List<Coach> coaches) {
+    public List<String> recommendWeekMenu(List<Coach> coaches) {
         List<String> recommendedCategories = new ArrayList<>();
         for (int dayIdx = 0; dayIdx < WEEKDAYS ; dayIdx++) {
             recommendDayCategory(recommendedCategories);
             String todayCategory = recommendedCategories.get(dayIdx);
             recommendDayMenuToCoaches(coaches, todayCategory);
         }
+        return recommendedCategories;
     }
     private void recommendDayMenuToCoaches(List<Coach> coaches, String recommendedDayCategory) {
         coaches.forEach((coach)-> recommendMenuToCoach(coach, recommendedDayCategory));
