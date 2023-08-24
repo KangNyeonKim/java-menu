@@ -16,7 +16,37 @@ public class Controller {
     public void start() {
         view.printStartComment();
         List<String> coachNames = readCoachNames();
+        List<Coach> coaches = readHateMenus(coachNames);
+        System.out.println("coaches = " + coaches);
     }
+
+    private List<Coach> readHateMenus(List<String> coachNames) {
+        List<Coach> coaches = new ArrayList<>();
+        for (String coachName : coachNames) {
+            view.printHateMenuInputComment(coachName);
+            Coach coach = resolveHateMenuInput(coachName);
+            coaches.add(coach);
+        }
+        return coaches;
+    }
+
+    private Coach resolveHateMenuInput(String coachName) {
+        Coach coach = new Coach(coachName);
+        List<String> hateMenus = parseInputLine();
+        try{
+            validateHateMenus(hateMenus);
+            hateMenus.forEach(coach::addHateMenus);
+            return coach;
+        } catch (IllegalArgumentException e) {
+            view.printErrorMessage(e.getMessage());
+            return resolveHateMenuInput(coachName);
+        }
+    }
+
+    private void validateHateMenus(List<String> hateMenus) {
+        if (hateMenus.size() > 2) throw new IllegalArgumentException("못 먹는 메뉴는 최대 2개 이하 입력해야 합니다.");
+    }
+
     private List<String> parseInputLine() {
         return List.of(scanner.nextLine().split(", "));
     }
