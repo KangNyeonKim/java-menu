@@ -32,7 +32,7 @@ public class Service {
 
     public void recommendMenuToCoach(Coach coach, String recommendedDayCategory) {
         String selectedRandomMenu = selectRandomMenu(recommendedDayCategory);
-        while (isDuplicateMenu(selectedRandomMenu, coach) || isHateMenu(selectedRandomMenu, coach)){
+        while (isDuplicateMenu(selectedRandomMenu, coach) || isHateMenu(selectedRandomMenu, coach)) {
             selectedRandomMenu = selectRandomMenu(recommendedDayCategory);
         }
         coach.addRecommendedMenu(selectedRandomMenu);
@@ -52,15 +52,16 @@ public class Service {
 
     public List<String> recommendWeekMenu(List<Coach> coaches) {
         List<String> recommendedCategories = new ArrayList<>();
-        for (int dayIdx = 0; dayIdx < WEEKDAYS ; dayIdx++) {
+        for (int dayIdx = 0; dayIdx < WEEKDAYS; dayIdx++) {
             recommendDayCategory(recommendedCategories);
             String todayCategory = recommendedCategories.get(dayIdx);
             recommendDayMenuToCoaches(coaches, todayCategory);
         }
         return recommendedCategories;
     }
+
     private void recommendDayMenuToCoaches(List<Coach> coaches, String recommendedDayCategory) {
-        coaches.forEach((coach)-> recommendMenuToCoach(coach, recommendedDayCategory));
+        coaches.forEach((coach) -> recommendMenuToCoach(coach, recommendedDayCategory));
     }
 }
 
