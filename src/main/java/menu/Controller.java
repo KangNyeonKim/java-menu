@@ -37,7 +37,7 @@ public class Controller {
     private Coach resolveHateMenuInput(String coachName) {
         Coach coach = new Coach(coachName);
         List<String> hateMenus = parseInputLine();
-        try{
+        try {
             validateHateMenus(hateMenus);
             hateMenus.forEach(coach::addHateMenus);
             return coach;
@@ -66,7 +66,7 @@ public class Controller {
         try {
             validateCoachNames(coachNames);
             return coachNames;
-        }catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             view.printErrorMessage(e.getMessage());
             return resolveCoachInput();
         }
